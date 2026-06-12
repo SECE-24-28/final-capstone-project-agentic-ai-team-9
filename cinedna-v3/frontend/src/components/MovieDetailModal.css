@@ -1,0 +1,233 @@
+/* ─── Movie Detail Modal ─────────────────────────────────────────────────── */
+
+/* Overlay / scrim */
+.mdm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  animation: mdm-fade-in 0.2s ease;
+}
+
+@keyframes mdm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Panel — slides in from right */
+.mdm-panel {
+  position: relative;
+  width: min(640px, 100vw);
+  height: 100vh;
+  overflow-y: auto;
+  border-radius: 0;
+  border-left: 1px solid var(--border);
+  border-top: none; border-right: none; border-bottom: none;
+  background: #1e1e22;
+  animation: mdm-slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes mdm-slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Backdrop hero ── */
+.mdm-backdrop {
+  position: relative;
+  height: 220px;
+  background: var(--bg-surface) center / cover no-repeat;
+  flex-shrink: 0;
+}
+.mdm-backdrop-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(30,30,34,0) 30%, #1e1e22 100%);
+}
+.mdm-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+  z-index: 1;
+}
+.mdm-close:hover { background: rgba(99,179,163,0.4); border-color: var(--accent); }
+
+/* ── Body ── */
+.mdm-body {
+  padding: 0 28px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Top: poster + meta ── */
+.mdm-top {
+  display: flex;
+  gap: 20px;
+  margin-top: -60px;
+  position: relative;
+  z-index: 1;
+}
+
+.mdm-poster-wrap {
+  flex-shrink: 0;
+  width: 120px;
+}
+.mdm-poster {
+  width: 120px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-card);
+  display: block;
+}
+.mdm-poster-placeholder {
+  width: 120px;
+  height: 180px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+}
+
+.mdm-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 56px;   /* push below the fold overlap */
+}
+
+.mdm-title {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  line-height: 1.2;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+/* ── Badges row ── */
+.mdm-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mdm-badge {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.mdm-badge--gold  { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); color: var(--gold); }
+.mdm-badge--purple { background: rgba(99,179,163,0.12); border-color: var(--border-accent); color: var(--accent-light); }
+
+/* ── Genres ── */
+.mdm-genres { display: flex; flex-wrap: wrap; gap: 6px; }
+.mdm-genre-tag {
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  background: rgba(99,179,163,0.1);
+  border: 1px solid rgba(99,179,163,0.25);
+}
+
+/* ── Overview ── */
+.mdm-overview {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ── Loading ── */
+.mdm-loading { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.85rem; }
+
+/* ── Sections (cast, keywords) ── */
+.mdm-section { display: flex; flex-direction: column; gap: 14px; }
+.mdm-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Cast */
+.mdm-cast-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.mdm-cast-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition);
+}
+.mdm-cast-item:hover { border-color: var(--border-accent); }
+.mdm-cast-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mdm-cast-name  { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); }
+.mdm-cast-char  { font-size: 0.72rem; color: var(--text-muted); }
+
+/* Keywords */
+.mdm-keywords { display: flex; flex-wrap: wrap; gap: 8px; }
+.mdm-keyword {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  background: rgba(99,179,163,0.08);
+  border: 1px solid rgba(99,179,163,0.2);
+  color: var(--accent);
+}
+
+/* DNA reason */
+.mdm-reason {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--accent-light);
+  background: rgba(99,179,163,0.08);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+/* Scrollbar inside panel */
+.mdm-panel::-webkit-scrollbar { width: 4px; }
+.mdm-panel::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }

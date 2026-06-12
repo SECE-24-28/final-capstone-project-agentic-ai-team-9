@@ -1,0 +1,122 @@
+/* ─── Discover Page ──────────────────────────────────────────────────────── */
+.discover-page { max-width: 1200px; margin: 0 auto; }
+
+/* ── Mode Tabs ── */
+.disc-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.disc-tab {
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+.disc-tab:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.disc-tab.active {
+  background: var(--grad-primary);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(99,179,163,0.35);
+}
+
+/* ── Control Bar ── */
+.disc-controls {
+  display: flex;
+  gap: 12px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.disc-controls:hover { transform: none; }
+.disc-controls .input { flex: 1; min-width: 220px; }
+
+/* ── Search input with icon ── */
+.search-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+.search-input {
+  padding-left: 40px !important;
+  width: 100%;
+}
+.search-spinner {
+  position: absolute;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Section label ── */
+.disc-section-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* ── Search prompt ── */
+.disc-search-prompt {
+  padding: 60px;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.disc-search-prompt h3 { color: var(--text-primary); font-size: 1.2rem; }
+
+/* ── Generating / loading state ── */
+.generating-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.generating-state p { margin-top: 16px; font-size: 0.95rem; }
+
+/* ── Empty state ── */
+.empty-state {
+  padding: 60px;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.empty-icon { font-size: 3rem; margin-bottom: 8px; }
+.empty-state h3 { color: var(--text-primary); font-size: 1.2rem; }
+
+/* ── Link ── */
+.link { color: var(--accent-light); text-decoration: none; }
+.link:hover { text-decoration: underline; }
